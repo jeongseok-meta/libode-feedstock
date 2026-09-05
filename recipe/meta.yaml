@@ -106,8 +106,8 @@ outputs:
       run:
         - libode
     files:
-      - lib/python{{ PY_VER }}/site-packages/ode.*                   # [unix]
-      - lib/python{{ PY_VER }}/site-packages/Open_Dynamics_Engine*egg-info  # [unix]
+      - lib/python{{ PY_VER }}*/site-packages/ode.*                  # [unix]
+      - lib/python{{ PY_VER }}*/site-packages/Open_Dynamics_Engine*egg-info  # [unix]
       - Lib/site-packages/ode.*.pyd                                  # [win]
       - Lib/site-packages/Open_Dynamics_Engine*egg-info              # [win]
     test:
