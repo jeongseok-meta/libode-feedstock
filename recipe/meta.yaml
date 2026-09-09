@@ -19,7 +19,7 @@ source:
     - fix-cython-3-1.patch
 
 build:
-  number: 1
+  number: 3
   run_exports:
     # No ABI docs or ABI Laboratory history, better be conservative
     - {{ pin_subpackage(name, max_pin='x.x.x') }}
@@ -108,8 +108,12 @@ outputs:
     files:
       - lib/python{{ PY_VER }}*/site-packages/ode.*                  # [unix]
       - lib/python{{ PY_VER }}*/site-packages/Open_Dynamics_Engine*egg-info  # [unix]
-      - Lib/site-packages/ode.*.pyd                                  # [win]
-      - Lib/site-packages/Open_Dynamics_Engine*egg-info              # [win]
+      - Lib/site-packages/ode.*.pyd                                  # [win and py<315]
+      - Lib/site-packages/open_dynamics_engine-*.dist-info/**        # [win and py<315]
+      # Python 3.15 adopts a Unix-like Windows layout:
+      # https://github.com/conda-forge/python-feedstock/pull/908
+      - lib/python/site-packages/ode.*.pyd                            # [win and py>=315]
+      - lib/python/site-packages/open_dynamics_engine-*.dist-info/**  # [win and py>=315]
     test:
       imports:
         - ode
